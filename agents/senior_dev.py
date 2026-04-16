@@ -1,5 +1,4 @@
-from crewai import Agent
-from langchain_anthropic import ChatAnthropic
+from crewai import Agent, LLM
 import yaml
 from pathlib import Path
 
@@ -17,7 +16,11 @@ class SeniorDevAgent:
             backstory=senior_prompt["backstory"],
             verbose=True,
             allow_delegation=False,
-            llm=ChatAnthropic(model="claude-3-opus-20240229", temperature=0.7),
+            llm=LLM(
+                model="ollama/mistral",
+                base_url="http://localhost:11434",
+                temperature=0.7,
+            ),
         )
 
 def get_senior_dev_agent() -> Agent:

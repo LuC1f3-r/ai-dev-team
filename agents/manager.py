@@ -1,5 +1,4 @@
-from crewai import Agent
-from langchain_openai import ChatOpenAI
+from crewai import Agent, LLM
 import yaml
 from pathlib import Path
 
@@ -17,7 +16,11 @@ class ManagerAgent:
             backstory=manager_prompt["backstory"],
             verbose=True,
             allow_delegation=True,
-            llm=ChatOpenAI(model="gpt-4", temperature=0.7),
+            llm=LLM(
+                model="ollama/mistral",
+                base_url="http://localhost:11434",
+                temperature=0.7,
+            ),
         )
 
 def get_manager_agent() -> Agent:

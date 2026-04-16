@@ -16,7 +16,7 @@ class TaskBoardComponent:
 
         memory_data = controller.get_memory_data()
         short_term = memory_data.get("short_term", {})
-        task_history = short_term.get("task_history", [])
+        task_history = short_term.get("tasks", [])
 
         cols = st.columns(4)
 
@@ -29,7 +29,7 @@ class TaskBoardComponent:
 
         current_task = short_term.get("current_task", "")
 
-        if current_task and memory_data.get("short_term", {}).get("agent_states"):
+        if current_task:
             task_status = controller.get_task_status()
             if task_status == "running":
                 tasks_by_column["In Progress"].append({

@@ -1,5 +1,4 @@
-from crewai import Agent
-from langchain_community.chat_models import ChatOllama
+from crewai import Agent, LLM
 import yaml
 from pathlib import Path
 
@@ -17,8 +16,8 @@ class BackendDevAgent:
             backstory=backend_prompt["backstory"],
             verbose=True,
             allow_delegation=False,
-            llm=ChatOllama(
-                model="mistral",
+            llm=LLM(
+                model="ollama/mistral",
                 base_url="http://localhost:11434",
                 temperature=0.5,
             ),
