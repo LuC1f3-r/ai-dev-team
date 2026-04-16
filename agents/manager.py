@@ -16,11 +16,7 @@ class ManagerAgent:
             backstory=manager_prompt["backstory"],
             verbose=True,
             allow_delegation=True,
-            llm=LLM(
-                model="ollama/mistral",
-                base_url="http://localhost:11434",
-                temperature=0.7,
-            ),
+            llm=LLM(model="groq/llama-3.3-70b-versatile", temperature=0.7),
         )
 
 def get_manager_agent() -> Agent:
