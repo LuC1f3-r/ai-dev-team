@@ -1,0 +1,48 @@
+models:
+  # Manager - uses GPT-4 for orchestration
+  manager:
+    provider: openai
+    model: gpt-4
+    temperature: 0.7
+
+  # Senior Dev - uses Claude for complex architecture
+  senior_dev:
+    provider: anthropic
+    model: claude-3-opus-20240229
+    temperature: 0.7
+
+  # Frontend Dev - local Codellama for code generation
+  frontend_dev:
+    provider: ollama
+    model: codellama
+    temperature: 0.5
+    base_url: http://localhost:11434
+
+  # Backend Dev - local Mistral for API/logic
+  backend_dev:
+    provider: ollama
+    model: mistral
+    temperature: 0.5
+    base_url: http://localhost:11434
+
+  # Tester - Codellama for test generation
+  tester:
+    provider: ollama
+    model: codellama
+    temperature: 0.5
+    base_url: http://localhost:11434
+
+  # Complexity-based routing
+  routing:
+    simple:
+      frontend: ollama/codellama
+      backend: ollama/mistral
+      testing: ollama/codellama
+
+    complex:
+      frontend: openai/gpt-4
+      backend: openai/gpt-4
+      testing: anthropic/claude-3-sonnet-20240229
+
+    # Senior always uses Claude for architecture
+    senior: anthropic/claude-3-opus-20240229
